@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <product-grid class="col-sm-9 col-md-6"></product-grid>
+        <div class="col-sm-3 col-md-6">
+            <form name="pf" ng-submit="addProduct()">
+                <p>Title:
+                    <br>
+                    <input type="text" name="title" ng-model="Object.title" required>
+                    <span ng-show="pf.title.$error.required">title is required.</span>
+                    </span>
+                </p>
+                <p>Price:
+                    <br>
+                    <input type="number" name="price" ng-model="Object.price" required>
+                    <span style="color:red" ng-show="pf.price.$dirty && pf.price.$invalid">
+                    <span ng-show="pf.price.$error.required">price is required.</span>
+                    </span>
+                </p>
+                <p>Colour:
+                    <br>
+                    <input type="color" name="color" ng-model="Object.color" required></input>
+                    <span style="color:red" ng-show="pf.color.$dirty && pf.color.$invalid">
+                    <span ng-show="pf.color.$error.required">select color</span>
+                    </span>
+                </p>
+                <p>Product Details:
+                    <br>
+                    <textarea name="info" ng-model="Object.info" required></textarea>
+                    <span style="color:red" ng-show="pf.info.$dirty && pf.price.$invalid">
+                    <span ng-show="pf.info.$error.required">info is required.</span>
+                    </span>
+                </p>
+                <p>
+                    <button class="btn btn-primary" type="submit" ng-disabled="!pf.info.$valid || !pf.$dirty">Add</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

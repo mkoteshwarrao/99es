@@ -1,0 +1,28 @@
+{
+    "products": [{
+        "id": "1",
+        "title": "Coolpad Note 3(Black, 16GB)",
+        "price": 8999,
+        "color": "#000000",
+        "info": "The Note 3 is that the most cost-effective below Rs.10,000 phone to come back with a fingerprint sensor that works and works quite well at that."
+    }, {
+        "id": "2",
+        "title": "Samsung Galaxy On5 (Black, 8 GB)",
+
+        "price": 8999,
+        "color": "#FF0000",
+        "info": "Samsung Galaxy On5 with sleek design will come with unique built in features like the UDS (Ultra Data Saving) Mode and 4G Download Booster which promise to provide a differentiated experience to the millennial."
+    }, {
+        "id": "3",
+        "title": "Samsung Galaxy On5 (Gold, 8 GB)",
+        "price": 8999,
+        "color": "#00FF00",
+        "info": "Samsung Galaxy On5 with sleek design will come with unique built in features like the UDS (Ultra Data Saving) Mode and 4G Download Booster which promise to provide a differentiated experience to the millennial."
+    }, {
+        "id": "4",
+        "title": "Lenovo Vibe K4 Note (White,16GB)",
+        "price": 11999,
+        "color": "#0000FF",
+        "info": "Lenovo K4 Note is the First smartphone with TheaterMax technology and Dolby Atmos surround sound, helps you watch your videos on virtual giant screen cinematic experience using ANT VR head-mount."
+    }]
+}
