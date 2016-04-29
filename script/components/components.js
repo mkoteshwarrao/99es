@@ -38,19 +38,28 @@ app.directive('productGrid', function() {
             '<table class="table">' +
             '<thead>' +
             '<tr>' +
-            '<th>Product</th>' +
-            '<th>Price</th>' +
-            '<th>Variants</th>' +
+            '<th>category_id</th>' +
+            '<th>description</th>' +
+            '<th>id</th>' +
+             '<th>status</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody>' +
             '<tr ng-repeat="item in products" ng-click="editProduct(item)">' +
-            '<td>{{item.title}}</td>' +
-            '<td>{{item.price }}</td>' +
-            '<td><div style="background-color:{{item.color }};">{{item.color }}</div></td>' +
+            '<td>{{item.category_id}}</td>' +
+            '<td>{{item.description }}</td>' +
+            '<td>{{item.id }}</td>' +
+            '<td>{{item.status }}</td>' +
             '</tr>' +
             '</tbody>' +
             '</table>' +
             '</div>'
     };
 })
+
+/*
+category_id:"1000"
+description:"plumber"
+id:"1000"
+status:"1"
+*/

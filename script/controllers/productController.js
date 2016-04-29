@@ -20,7 +20,7 @@ app.controller('productController', ['$scope', '$modal', '$http', 'twoFieldMaste
 
             function(items) {
                 debugger;
-                $scope.products = items.data.products;
+                $scope.products = items.data;
 
             },
 

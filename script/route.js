@@ -22,7 +22,11 @@
   }]);*/
 
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config( ['FacebookProvider','$stateProvider','$urlRouterProvider',function(FacebookProvider,$stateProvider, $urlRouterProvider) {
+
+     var myAppId = '1712910572328799';
+     FacebookProvider.init(myAppId);
+     $urlRouterProvider.deferIntercept();
 
     $urlRouterProvider.otherwise('/home');
 
@@ -30,7 +34,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('home', {
             url: '/home',
             templateUrl: 'pages/home.html',
-            controller: 'homeController'
+            controller: 'loginController'
         })
         .state('about', {
             url: '/about',
@@ -56,5 +60,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'pages/productdetails.html',
             controller: 'productDetailsController'
         })
+        .state('login', {
+            url: '/login}',
+            templateUrl: 'pages/login.html',
+            controller: 'loginController'
+        })
 
-});
+}]).run(function ($rootScope, $urlRouter, Facebook) {
+  
+     $rootScope.$on('$locationChangeSuccess', function(e) {
+       // UserService is an example service for managing user state
+       if (Facebook.getLoginStatus()) return;
+  
+       // Prevent $urlRouter's default handler from firing
+       e.preventDefault();
+        $scope.$broadcast('login');
+      // Facebook.getLoginStatus().then(function() {
+         // Once the user has logged in, sync the current URL
+         // to the router:
+       //  $urlRouter.sync();
+       //});
+     });
+  
+     // Configures $urlRouter's listener *after* your custom listener
+     $urlRouter.listen();
+    });;
