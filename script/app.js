@@ -1,2 +1,2 @@
-var app = angular.module("app", ['facebook','ui.router','mgcrea.ngStrap.modal','ngStorage']);
+var app = angular.module("app", ['ui.router','mgcrea.ngStrap.modal','ngCookies']);
 

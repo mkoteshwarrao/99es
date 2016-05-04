@@ -13,13 +13,14 @@ app.controller('productController', ['$scope', '$modal', '$http', 'twoFieldMaste
 
         $scope.products = {};
         $scope.myModal = $scope.myModal | {};
-
+ 
         $scope.getProducts = productsService.getProducts();
 
         $scope.getProducts.then(
 
             function(items) {
-                debugger;
+                
+debugger;
                 $scope.products = items.data;
 
             },

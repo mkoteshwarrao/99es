@@ -1,5 +1,5 @@
 app.controller('homeController', function homeController($scope) {
    
-    $scope.message = "Home Page";
+    $scope.message = ":) Home Page ";
 
 });

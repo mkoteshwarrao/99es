@@ -6,6 +6,7 @@ app.service('productsService', ['$http', '$q', function($http, $q) {
         myMethods = {
 
             getProducts: function() {
+                debugger;
                 var promise = $http.get('data/products.json'),
                     deferObject = deferObject || $q.defer();
 
@@ -25,6 +26,7 @@ app.service('productsService', ['$http', '$q', function($http, $q) {
             },
 
             getProduct: function(value) {
+                 debugger;
                 var promise = $http.get('data/products.json'),
                     deferObject = deferObject || $q.defer();
 

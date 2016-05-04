@@ -1,5 +1,6 @@
 <?php
 	
+     require_once('authentication.php');
      require_once('login.php');
      require_once('twofieldmasters.php');
      require_once('twofieldmasters_s.php');
@@ -19,17 +20,58 @@
 	   // $data = json_decode($ref, true);   
         $data = $ref;   
 	}
-       
-	   $obj = new $service;       
-              
+
+//=====================================================
+       // $headers = apache_request_headers();
+
+      //  foreach ($headers as $header => $value) {
+     //       echo "$header: $value <br />\n";
+      //  }
+//=====================================================
+
+
+    $pass = false;
+
+    if($service == "login" && $method == "loginuser")
+    {
+       // if login service 
+
+        $pass = false;
+
+        $obj = new $service;             
         if($data)
         {
+            // echo implode(" ",$data);
             $obj->$method($data);
         }  
         else
         {
             $obj->$method(null);
-        }       
+        }  
+
+    }else{
+
+         //validate user
+        $auth = new authentication();
+        $pass = $auth->checkuser(true);
+    }
+    
+    if($pass){
+       $obj = new $service;             
+        if($data)
+        {
+            // echo implode(" ",$data);
+            $obj->$method($data);
+        }  
+        else
+        {
+            $obj->$method(null);
+        }  
+
+    }
+
+   
+	        
 ?>
 
 

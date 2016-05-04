@@ -22,11 +22,7 @@
   }]);*/
 
 
-app.config( ['FacebookProvider','$stateProvider','$urlRouterProvider',function(FacebookProvider,$stateProvider, $urlRouterProvider) {
-
-     var myAppId = '1712910572328799';
-     FacebookProvider.init(myAppId);
-     $urlRouterProvider.deferIntercept();
+app.config( ['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -34,7 +30,7 @@ app.config( ['FacebookProvider','$stateProvider','$urlRouterProvider',function(F
         .state('home', {
             url: '/home',
             templateUrl: 'pages/home.html',
-            controller: 'loginController'
+            controller: 'homeController'
         })
         .state('about', {
             url: '/about',
@@ -66,22 +62,31 @@ app.config( ['FacebookProvider','$stateProvider','$urlRouterProvider',function(F
             controller: 'loginController'
         })
 
-}]).run(function ($rootScope, $urlRouter, Facebook) {
+}]);
+
+app.run(['$state','$rootScope','$location', '$urlRouter','$cookieStore', '$http',function ($state,$rootScope,$location, $urlRouter,$cookieStore,$http) {
   
-     $rootScope.$on('$locationChangeSuccess', function(e) {
-       // UserService is an example service for managing user state
-       if (Facebook.getLoginStatus()) return;
-  
-       // Prevent $urlRouter's default handler from firing
-       e.preventDefault();
-        $scope.$broadcast('login');
-      // Facebook.getLoginStatus().then(function() {
-         // Once the user has logged in, sync the current URL
-         // to the router:
-       //  $urlRouter.sync();
-       //});
-     });
-  
+     /*$rootScope.$on('$locationChangeSuccess', function(e) {
+           $urlRouter.sync();
+       });*/
+
      // Configures $urlRouter's listener *after* your custom listener
-     $urlRouter.listen();
-    });;
+     //$urlRouter.listen();
+
+
+     $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        }
+ 
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+          debugger;
+            // redirect to login page if not logged in and trying to access a restricted page
+            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+            var loggedIn = $rootScope.globals.currentUser;
+            if (restrictedPage && !loggedIn) {
+                $state.go('login');
+            }
+        });
+
+    }]);

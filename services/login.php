@@ -25,17 +25,27 @@ class login extends dbconnector {
     	}	
 
     	//$query = "SELECT * FROM users";
-    	$query = "SELECT * FROM users WHERE name = '".$params['user']."' AND password ='".$params['pass']."'";
+    	$query = "SELECT * FROM user WHERE user_name = '".$params['user']."' AND password ='".$params['pass']."'";
         
        $this->result = parent::execute($query,'json');
       
       if($this->result){   
+ 
+          session_start();
+          $_SESSION['sid']=session_id();
+          
+            $response = array(
+             'code' => 1,
+             'success' => true,
+             'data' => $this->result
+            );
 
-      		echo  $this->result;
+          echo json_encode($response);
       }
       else
       {  
-             echo false;   
+    
+          echo "Please check Username and password";   
       } 
 
     }
