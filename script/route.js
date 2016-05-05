@@ -78,8 +78,9 @@ app.run(['$location','$rootScope','$state','authenticationService','$urlRouter',
                 event.preventDefault();
                  debugger;
                 $state.go('login');
-            }else if (next.name == 'login')
+            }else if (next.name == 'login' && authenticationService.isLoggedin())
             {
+                 event.preventDefault();
                 $state.go('home');
             }
         });
