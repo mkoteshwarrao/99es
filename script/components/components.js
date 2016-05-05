@@ -1,8 +1,9 @@
-app.directive('cHeader', function() {
+app.directive('cHeader', function($rootScope) {
 
     return {
         restrict: 'E',
-        templateUrl: 'pages/header.html'
+        templateUrl: 'pages/header.html',
+        controller: 'loginController'
     };
 
 });

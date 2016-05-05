@@ -33,7 +33,7 @@ class login extends dbconnector {
  
           session_start();
           $_SESSION['sid']=session_id();
-          
+
             $response = array(
              'code' => 1,
              'success' => true,
@@ -47,6 +47,14 @@ class login extends dbconnector {
     
           echo "Please check Username and password";   
       } 
+
+    }
+
+    function logoutuser(){
+      echo "Logged out scuccessfully";
+      session_start();
+      session_destroy();
+      setcookie(PHPSESSID,session_id(),time()-1);
 
     }
 }

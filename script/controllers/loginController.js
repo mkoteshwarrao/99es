@@ -1,25 +1,32 @@
-app.controller('loginController', ['$scope', '$location', 'authenticationService',
-    function productController($scope, $location, authenticationService) {
+app.controller('loginController', ['$scope', '$state', 'authenticationService',
+    function productController($scope, $state, authenticationService) {
 
-               var vm = $scope;
-                $scope.init = function () {
-                    debugger;
-                    authenticationService.ClearCredentials();      
+               var lg = $scope;
+                lg.init = function () {
+                    
+                    authenticationService.ClearCredentials();
                 }
 
-                $scope.login = function(value) {
-                         debugger;
-                        vm.dataLoading = true;
-                        authenticationService.Login(vm.username, vm.password, function (response) {
-                            debugger;
+                 
+                lg.login = function(value) {
+                          
+                        lg.dataLoading = true;
+                        authenticationService.Login(lg.username, lg.password, function (response) {
                             if (response.success) {
-                                authenticationService.SetCredentials(vm.username, vm.password);
-                                $location.path('/');
+                                debugger;
+                                $state.go('home');
+                                 
                             } else {
-                                FlashService.Error(response.message);
-                                vm.dataLoading = false;
+                                $state.go('login');
                             }
-            });
+                        });
+
+                };
+
+               lg.logout = function() {
+                        authenticationService.LogOut( function (response) {
+                                $state.go('login');
+                        });
 
                 };
     }]);

@@ -10,13 +10,24 @@
         var service = {};
 
         service.Login = Login;
+        service.LogOut = LogOut;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
+        service.isLoggedin = isLoggedin;
 
         return service;
+        
+        function isLoggedin() {
+                if($rootScope.authorization.currentUser)
+                {
+                    return true;
+                } 
+
+                return false;
+        }
 
         function Login(username, password, callback) {
- debugger;
+
              var Indata = {
                 'service' : 'login',
                 'method' : 'loginuser',
@@ -25,31 +36,49 @@
                     'pass':password
                 }
             };
- debugger;
+ 
            $http.post('services/cinterface.php',Indata)
                 .success(function (response) {
+                    SetCredentials(username,password)
                     callback(response);
                     debugger;
                 });
         }
 
+         function LogOut(callback) {
+  
+             var Indata = {
+                'service' : 'login',
+                'method' : 'logoutuser'
+             };
+ 
+           $http.post('services/cinterface.php',Indata)
+                .success(function (response) {
+                    ClearCredentials();
+                    callback(response);
+                    debugger;
+                });
+        }
+
+
         function SetCredentials(username, password) {
+            debugger;
             var authdata = Base64.encode(username + ':' + password);
 
-            $rootScope.globals = {
+            $rootScope.authorization = {
                 currentUser: {
                     username: username,
                     authdata: authdata
                 }
             };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
+            $cookieStore.put('authorization', $rootScope.authorization);
         }
 
         function ClearCredentials() {
-            $rootScope.globals = {};
-            $cookieStore.remove('globals');
+            $rootScope.authorization = {};
+            $cookieStore.remove('authorization');
             $http.defaults.headers.common.Authorization = 'Basic';
         }
 

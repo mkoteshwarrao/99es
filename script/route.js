@@ -27,6 +27,11 @@ app.config( ['$stateProvider','$urlRouterProvider',function($stateProvider, $url
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
+        .state('login', {
+            url: '/login}',
+            templateUrl: 'pages/login.html',
+            controller: 'loginController'
+        })
         .state('home', {
             url: '/home',
             templateUrl: 'pages/home.html',
@@ -56,35 +61,19 @@ app.config( ['$stateProvider','$urlRouterProvider',function($stateProvider, $url
             templateUrl: 'pages/productdetails.html',
             controller: 'productDetailsController'
         })
-        .state('login', {
-            url: '/login}',
-            templateUrl: 'pages/login.html',
-            controller: 'loginController'
-        })
+
 
 }]);
 
-app.run(['$state','$rootScope','$location', '$urlRouter','$cookieStore', '$http',function ($state,$rootScope,$location, $urlRouter,$cookieStore,$http) {
-  
-     /*$rootScope.$on('$locationChangeSuccess', function(e) {
-           $urlRouter.sync();
-       });*/
+app.run(['$rootScope','$state','authenticationService','$urlRouter','$cookieStore',
+  function ($rootScope,$state,authenticationService,$urlRouter,$cookieStore) {
 
-     // Configures $urlRouter's listener *after* your custom listener
-     //$urlRouter.listen();
+        $rootScope.authorization = $cookieStore.get('authorization') || {};
 
-
-     $rootScope.globals = $cookieStore.get('globals') || {};
-        if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-        }
- 
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-          debugger;
-            // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
-            var loggedIn = $rootScope.globals.currentUser;
-            if (restrictedPage && !loggedIn) {
+        $rootScope.$on('$stateChangeStart', function (event, next, current) {
+            if (next.name != 'login' && !authenticationService.isLoggedin()) {
+                event.preventDefault();
+                 debugger;
                 $state.go('login');
             }
         });
