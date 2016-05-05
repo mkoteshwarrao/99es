@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(function() {
     'use strict';
 
     angular
@@ -6,6 +6,7 @@
         .factory('authenticationService', AuthenticationService);
 
     AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope'];
+
     function AuthenticationService($http, $cookieStore, $rootScope) {
         var service = {};
 
@@ -16,44 +17,43 @@
         service.isLoggedin = isLoggedin;
 
         return service;
-        
-        function isLoggedin() {
-                if($rootScope.authorization.currentUser)
-                {
-                    return true;
-                } 
 
-                return false;
+        function isLoggedin() {
+            if ($rootScope.authorization.currentUser) {
+                return true;
+            }
+
+            return false;
         }
 
         function Login(username, password, callback) {
 
-             var Indata = {
-                'service' : 'login',
-                'method' : 'loginuser',
+            var Indata = {
+                'service': 'login',
+                'method': 'loginuser',
                 'payload': {
-                    'user':username,
-                    'pass':password
+                    'user': username,
+                    'pass': password
                 }
             };
- 
-           $http.post('services/cinterface.php',Indata)
-                .success(function (response) {
-                    SetCredentials(username,password)
+
+            $http.post('services/cinterface.php', Indata)
+                .success(function(response) {
+                    SetCredentials(username, password)
                     callback(response);
                     debugger;
                 });
         }
 
-         function LogOut(callback) {
-  
-             var Indata = {
-                'service' : 'login',
-                'method' : 'logoutuser'
-             };
- 
-           $http.post('services/cinterface.php',Indata)
-                .success(function (response) {
+        function LogOut(callback) {
+
+            var Indata = {
+                'service': 'login',
+                'method': 'logoutuser'
+            };
+
+            $http.post('services/cinterface.php', Indata)
+                .success(function(response) {
                     ClearCredentials();
                     callback(response);
                     debugger;
@@ -83,10 +83,11 @@
         }
 
         function base64encode(value) {
-            return  Base64.encode(value);
+            return Base64.encode(value);
         }
-         function base64decode(value) {
-            return  Base64.decode(value);
+
+        function base64decode(value) {
+            return Base64.decode(value);
         }
     }
 
@@ -95,7 +96,7 @@
 
         keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
 
-        encode: function (input) {
+        encode: function(input) {
             var output = "";
             var chr1, chr2, chr3 = "";
             var enc1, enc2, enc3, enc4 = "";
@@ -129,7 +130,7 @@
             return output;
         },
 
-        decode: function (input) {
+        decode: function(input) {
             var output = "";
             var chr1, chr2, chr3 = "";
             var enc1, enc2, enc3, enc4 = "";

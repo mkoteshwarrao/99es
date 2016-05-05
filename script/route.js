@@ -28,7 +28,7 @@ app.config( ['$stateProvider','$urlRouterProvider',function($stateProvider, $url
 
     $stateProvider
         .state('login', {
-            url: '/login}',
+            url: '/login',
             templateUrl: 'pages/login.html',
             controller: 'loginController'
         })
@@ -65,16 +65,22 @@ app.config( ['$stateProvider','$urlRouterProvider',function($stateProvider, $url
 
 }]);
 
-app.run(['$rootScope','$state','authenticationService','$urlRouter','$cookieStore',
-  function ($rootScope,$state,authenticationService,$urlRouter,$cookieStore) {
+app.run(['$location','$rootScope','$state','authenticationService','$urlRouter','$cookieStore',
+  function ($location,$rootScope,$state,authenticationService,$urlRouter,$cookieStore) {
 
         $rootScope.authorization = $cookieStore.get('authorization') || {};
-
+        $rootScope.location = $location;
         $rootScope.$on('$stateChangeStart', function (event, next, current) {
+
+            $rootScope.location = $location;
+
             if (next.name != 'login' && !authenticationService.isLoggedin()) {
                 event.preventDefault();
                  debugger;
                 $state.go('login');
+            }else if (next.name == 'login')
+            {
+                $state.go('home');
             }
         });
 
