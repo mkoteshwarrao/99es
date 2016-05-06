@@ -1,4 +1,4 @@
-app.directive('cHeader', function($rootScope) {
+app.directive('cHeader', function() {
 
     return {
         restrict: 'E',
@@ -35,32 +35,25 @@ app.directive('pDetails', function() {
 app.directive('productGrid', function() {
     return {
         restrict: 'E',
-        template: '<div class="container-fluid">' +
-            '<table class="table">' +
-            '<thead>' +
-            '<tr>' +
-            '<th>category_id</th>' +
-            '<th>description</th>' +
-            '<th>id</th>' +
-             '<th>status</th>' +
-            '</tr>' +
-            '</thead>' +
-            '<tbody>' +
-            '<tr ng-repeat="item in products" ng-click="editProduct(item)">' +
-            '<td>{{item.category_id}}</td>' +
-            '<td>{{item.description }}</td>' +
-            '<td>{{item.id }}</td>' +
-            '<td>{{item.status }}</td>' +
-            '</tr>' +
-            '</tbody>' +
-            '</table>' +
-            '</div>'
+        template:   '<div class="container-fluid">' +
+                    '<table class="table">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>category_id</th>' +
+                    '<th>description</th>' +
+                    '<th>id</th>' +
+                     '<th>status</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '<tr ng-repeat="item in products" ng-click="editProduct(item)">' +
+                    '<td>{{item.category_id}}</td>' +
+                    '<td>{{item.description }}</td>' +
+                    '<td>{{item.id }}</td>' +
+                    '<td>{{item.status }}</td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>' +
+                    '</div>'
     };
 })
-
-/*
-category_id:"1000"
-description:"plumber"
-id:"1000"
-status:"1"
-*/

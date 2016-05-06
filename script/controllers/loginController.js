@@ -1,5 +1,5 @@
-app.controller('loginController', ['$scope', '$state', 'authenticationService',
-    function productController($scope, $state, authenticationService) {
+app.controller('loginController', ['$scope', '$state', 'authenticationService','$modal',
+    function productController($scope, $state, authenticationService,$modal) {
 
         var lg = $scope;
         lg.dataLoading = false;
@@ -26,10 +26,28 @@ app.controller('loginController', ['$scope', '$state', 'authenticationService',
         };
 
         lg.logout = function() {
-            authenticationService.LogOut(function(response) {
-                $state.go('login');
-            });
 
-        };
+                 $scope.myModal = $modal({
+                        scope: $scope,
+                        templateUrl: 'pages/confirmLogoutModel.html',
+                        show: true,
+                        backdrop: 'static'
+                });
+
+                $scope.myModal.$promise.then($scope.myModal.show); 
+        }; 
+
+        $scope.ok = function() {
+            $scope.myModal.$promise.then($scope.myModal.hide);
+             authenticationService.LogOut(function(response) {
+                        $state.go('login');
+             });
+        }; 
+
+        $scope.cancel = function() {
+            $scope.myModal.$promise.then($scope.myModal.hide);
+
+        }; 
+
     }
 ]);
