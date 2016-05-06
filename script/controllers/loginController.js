@@ -2,6 +2,7 @@ app.controller('loginController', ['$scope', '$state', 'authenticationService',
     function productController($scope, $state, authenticationService) {
 
         var lg = $scope;
+        lg.dataLoading = false;
         lg.init = function() {
 
             authenticationService.ClearCredentials();
@@ -9,8 +10,8 @@ app.controller('loginController', ['$scope', '$state', 'authenticationService',
 
 
         lg.login = function(value) {
-
             lg.dataLoading = true;
+            
             authenticationService.Login(lg.username, lg.password, function(response) {
                 if (response.success) {
                     debugger;
@@ -19,6 +20,7 @@ app.controller('loginController', ['$scope', '$state', 'authenticationService',
                 } else {
                     $state.go('login');
                 }
+                lg.dataLoading = false;
             });
 
         };
