@@ -1,64 +1,18 @@
-app.service('twoFieldMasterServices', ['$http', '$q', function($http, $q) {
+app.service('twoFieldMasterServices', ['m_service''$http', '$q', function(m_service,$http, $q) {
 
     var products = {};
 
     var deferObject,
         myMethods = {
 
-            getProducts: function() {
+            getCategoryByKey: function(key) {
 
-            var Indata = {
-                'service' : 'twofieldmasters_s',
-                'method' : 'gettwofieldslist',
-                'payload': {
-                    'key':1000
-                }
-            };
+                var payload = {
+                        'key':key
+                    };
 
-                var promise = $http.post('services/cinterface.php',Indata),
-                    deferObject = deferObject || $q.defer();
-
-                promise.then(
-
-                    function(res) {
-                        products = res;
-                        deferObject.resolve(res);
-                    },
-
-                    function(failure) {
-
-                        deferObject.reject(failure);
-                    });
-
-                return deferObject.promise;
+               return m_service.call('twofieldmasters_s','gettwofieldslist',payload)
             },
-
-            getProduct: function(value) {
-                var promise = $http.get('data/products.json'),
-                    deferObject = deferObject || $q.defer();
-
-                promise.then(
-
-                    function(res) {
-debugger;
-                        angular.forEach(res.data.products, function(item) {
-
-                            if (item.id == value) {
-
-                                deferObject.resolve(item);
-
-                            }
-                        });
-                    },
-
-                    function(failure) {
-debugger;
-                        deferObject.reject(failure);
-                    });
-
-                return deferObject.promise;
-            }
-
         };
 
     return myMethods;

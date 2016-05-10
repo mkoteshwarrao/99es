@@ -1,2 +1,7 @@
-var app = angular.module("app", ['ui.bootstrap','ui.router','mgcrea.ngStrap.modal','ngCookies']);
-
+var app = angular.module("app", ['ui.bootstrap',
+    'ui.router',
+    'mgcrea.ngStrap.modal',
+    'ngCookies',
+    'configAPI',
+    'masterService'
+]);

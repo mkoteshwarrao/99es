@@ -1,38 +1,37 @@
- 
-<div class="container-fluid">
+ <div class="container-fluid">
     <div class="row">
+
         <product-grid class="col-sm-9 col-md-6"></product-grid>
+
         <div class="col-sm-3 col-md-6">
-            <form name="pf" ng-submit="addProduct()">
-                <p>Title:
+            <form name="pf" ng-submit="editSubCategory()">
+
+                <p>Id      : {{Object.id}}          </p>
+                <p>category: {{Object.category_id}} </p>
+
+                <p>Description:
                     <br>
-                    <input type="text" name="title" ng-model="Object.title" required>
-                    <span ng-show="pf.title.$error.required">title is required.</span>
+                    <input type="text" name="description" ng-model="Object.description" required></input>
+                    <span style="color:red" ng-show="pf.description.$dirty && pf.description.$invalid">
+                    <span ng-show="pf.description.$error.required">description color</span>
                     </span>
                 </p>
-                <p>Price:
+                <p>Bundle:
                     <br>
-                    <input type="number" name="price" ng-model="Object.price" required>
-                    <span style="color:red" ng-show="pf.price.$dirty && pf.price.$invalid">
-                    <span ng-show="pf.price.$error.required">price is required.</span>
+                    <textarea name="bundle" ng-model="Object.bundle" required></textarea>
+                    <span style="color:red" ng-show="pf.bundle.$dirty && pf.bundle.$invalid">
+                    <span ng-show="pf.bundle.$error.required">bundle is required.</span>
                     </span>
                 </p>
-                <p>Colour:
+                <p>status:
                     <br>
-                    <input type="color" name="color" ng-model="Object.color" required></input>
-                    <span style="color:red" ng-show="pf.color.$dirty && pf.color.$invalid">
-                    <span ng-show="pf.color.$error.required">select color</span>
-                    </span>
-                </p>
-                <p>Product Details:
-                    <br>
-                    <textarea name="info" ng-model="Object.info" required></textarea>
-                    <span style="color:red" ng-show="pf.info.$dirty && pf.price.$invalid">
-                    <span ng-show="pf.info.$error.required">info is required.</span>
+                    <input type="number" name="status" ng-model="Object.status" required></input>
+                    <span style="color:red" ng-show="pf.status.$dirty && pf.status.$invalid">
+                    <span ng-show="pf.status.$error.required">status is required.</span>
                     </span>
                 </p>
                 <p>
-                    <button class="btn btn-primary" type="submit" ng-disabled="!pf.info.$valid || !pf.$dirty">Add</button>
+                  <button class="btn btn-primary" type="submit" ng-disabled="!pf.$valid || !pf.$dirty">Edit</button>
                 </p>
             </form>
         </div>

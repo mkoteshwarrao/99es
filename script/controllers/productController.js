@@ -1,38 +1,37 @@
-app.controller('productController', ['$scope', '$modal', '$http', 'twoFieldMasterServices',
+app.controller('productController', ['$scope', '$modal', '$http','appconstant','twoFieldMasterServices',
 
-    function productController($scope, $modal, $http, productsService) {
+    function productController($scope, $modal, $http,appconstant, twoFieldMasterServices) {
 
         $scope.Object = {}
         $scope.Object.id = "";
-        $scope.Object.title = "";
-        $scope.Object.image = "";
-        $scope.Object.price = "";
-        $scope.Object.color = "";
-        $scope.Object.info = "";
+        $scope.Object.category_id = "";
+        $scope.Object.description = "";
+        $scope.Object.bundle = "";
+        $scope.Object.status = "";
 
 
         $scope.products = {};
         $scope.myModal = $scope.myModal | {};
- 
-        $scope.getProducts = productsService.getProducts();
+
+        $scope.getProducts = twoFieldMasterServices.getProducts();
 
         $scope.getProducts.then(
 
             function(items) {
-                
-debugger;
+
+                debugger;
                 $scope.products = items.data;
 
             },
 
             function(reason) {
-                    debugger;
+                debugger;
             }
         );
 
         $scope.showDetails = function(value) {
 
-            $scope.getProduct = productsService.getProduct(value);
+            $scope.getProduct = twoFieldMasterServices.getProduct(value);
             $scope.getProduct.then(
 
                 function(item) {
@@ -55,21 +54,9 @@ debugger;
             );
         };
 
-        $scope.hideModal = function() {
-            $scope.myModal.$promise.then($scope.myModal.hide);
-        };
-
-        $scope.addProduct = function() {
-            if (!$scope.Object.id) {
-                $scope.Object.id = $scope.products.length; /*this will add duplicate ids in reality */
-                $scope.products.push($scope.Object);
-            }
-
-            $scope.Object = {};
-        };
-
-        $scope.editProduct = function(item) {
-            $scope.Object = new Object(item);
+        $scope.editSubCategory = function() {
+            debugger
+            $scope.Object;
         };
 
     }
