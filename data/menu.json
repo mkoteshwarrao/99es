@@ -1,0 +1,15 @@
+{
+    "mainmenu": [{
+        "id": "1",
+        "title": "home",
+        "url": "home"
+    }, {
+        "id": "2",
+        "title": "products",
+        "url": "products"
+    }, {
+        "id": "3",
+        "title": "about",
+        "url": "about"
+    }]
+}

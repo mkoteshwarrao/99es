@@ -80,6 +80,10 @@
             $rootScope.authorization = {};
             $cookieStore.remove('authorization');
             $http.defaults.headers.common.Authorization = 'Basic';
+
+            /*menu clear
+            $rootScope.currentmenu = {};
+            $cookieStore.remove('currentmenu');*/
         }
 
         function base64encode(value) {

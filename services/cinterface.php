@@ -2,8 +2,8 @@
 	
      require_once('authentication.php');
      require_once('login.php');
-     require_once('twofieldmasters.php');
-     require_once('twofieldmasters_s.php');
+     require_once('admin/twofieldmasters.php');
+     require_once('admin/twofieldmasters_s.php');
      
      //echo "first hit";
      $rest_json = file_get_contents("php://input");

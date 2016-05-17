@@ -57,3 +57,12 @@ app.directive('productGrid', function() {
                     '</div>'
     };
 })
+
+
+app.directive('masterMenu', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'pages/menu.html',
+        controller: 'menuController'
+    };
+})

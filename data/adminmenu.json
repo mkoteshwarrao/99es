@@ -1,0 +1,15 @@
+{
+    "mastermenu": [{
+        "id": "1",
+        "title": "TFC",
+        "url": "tfc"
+    }, {
+        "id": "2",
+        "title": "TFSC",
+        "url": "tfsc"
+    }, {
+        "id": "3",
+        "title": "RC",
+        "url": "rc"
+    }]
+}

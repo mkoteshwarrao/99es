@@ -54,10 +54,16 @@ app.run(['$location','$rootScope','$state','authenticationService','$urlRouter',
                 event.preventDefault();
                  debugger;
                 $state.go('login');
-            }else if (next.name == 'login' && authenticationService.isLoggedin())
+            }
+            else if (next.name == 'login' && authenticationService.isLoggedin())
             {
                  event.preventDefault();
-                $state.go('home');
+                 var currentmenu = $cookieStore.get('currentmenu')
+                 if(currentmenu.url){
+                    $state.go(currentmenu.url); 
+                 }else{
+                     $state.go('home');
+                 }
             }
         });
 

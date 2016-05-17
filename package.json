@@ -1,0 +1,36 @@
+{
+  "name": "99es",
+  "version": "1.0.0",
+  "description": "99es ",
+  "main": "script/app.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-newer": "^1.2.0",
+    "grunt-nodemon": "^0.4.2",
+    "grunt-processhtml": "^0.3.13"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkoteshwarrao/99es.git"
+  },
+  "author": "koteshwar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkoteshwarrao/99es/issues"
+  },
+  "homepage": "https://github.com/mkoteshwarrao/99es#readme"
+}

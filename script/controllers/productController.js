@@ -13,7 +13,7 @@ app.controller('productController', ['$scope', '$modal', '$http','appconstant','
         $scope.products = {};
         $scope.myModal = $scope.myModal | {};
 
-        $scope.getProducts = twoFieldMasterServices.getProducts();
+        $scope.getProducts = twoFieldMasterServices.getSubCategoryByKey('1000');
 
         $scope.getProducts.then(
 

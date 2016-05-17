@@ -12,11 +12,12 @@
     <script src="libs/angular/angular-cookies.js"></script>
     <script src="libs/angular-strap/angular-strap.js"></script>
     <script src="libs/angular-strap/angular-strap.tpl.js"></script>
-    <script src="script/MasterService.js"></script>
+    <script src="script/services/MasterService.js"></script>
     <script src="script/configAPI.js"></script>
     <script src="script/app.js"></script>
     <script src="script/route.js"></script>
     <script src="script/controllers/mainController.js"></script>
+    <script src="script/controllers/menuController.js"></script>
     <script src="script/controllers/loginController.js"></script>
     <script src="script/controllers/homeController.js"></script>
     <script src="script/controllers/productController.js"></script>
@@ -26,13 +27,17 @@
     <script src="script/services/authenticationService.js"></script>
     <script src="script/services/productService.js"></script>
     <script src="script/services/twoFieldMasterServices.js"></script>
+    <script src="script/services/menuservice.js"></script>
     <link rel="stylesheet" href="custome.css">
 </head>
 
 <body>
     <div class="container-fluid" ng-controller="mainController">
         <c-header ng-if="location.path() !== '/login'"></c-header>
-        <div ui-view class="container"></div>
+        <div id="wrapper">
+            <master-menu id="sidebar-wrapper" ng-if="location.path() !== '/login'"></master-menu>
+            <div ui-view class="container"></div>
+        </div>
         <c-footer></c-footer>
     </div>
 </body>

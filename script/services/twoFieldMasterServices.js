@@ -1,11 +1,8 @@
-app.service('twoFieldMasterServices', ['m_service''$http', '$q', function(m_service,$http, $q) {
+app.service('twoFieldMasterServices', ['m_service', function(m_service) {
 
-    var products = {};
+    var myMethods = {
 
-    var deferObject,
-        myMethods = {
-
-            getCategoryByKey: function(key) {
+            getSubCategoryByKey: function(key) {
 
                 var payload = {
                         'key':key
