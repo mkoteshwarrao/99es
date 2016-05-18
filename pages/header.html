@@ -1,24 +1,15 @@
-<div class="container">
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default">
+<div class="container-fullwidth gradient">
+    <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">AngularJs</a>
+                <a class="navbar-brand" ui-sref="home">sample</a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a ui-sref="home">Home</a></li>
-                    <li><a ui-sref="products">Products</a></li>
-                    <li><a ui-sref="about">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><button id="logoutbtn"  ng-click="logout()" class="btn btn-primary">Logout</button></a></li>
+            <div class="dropdown navbar-right">
+                <a data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-click="logout()" class="dropdown-header"><span class="label label-danger">Logout</span></li>
                 </ul>
             </div>
         </div>

@@ -49,7 +49,7 @@ app.run(['$location','$rootScope','$state','authenticationService','$urlRouter',
         $rootScope.$on('$stateChangeStart', function (event, next, current) {
 
             $rootScope.location = $location;
-
+            var currentmenu = $cookieStore.get('currentmenu')
             if (next.name != 'login' && !authenticationService.isLoggedin()) {
                 event.preventDefault();
                  debugger;
@@ -58,13 +58,21 @@ app.run(['$location','$rootScope','$state','authenticationService','$urlRouter',
             else if (next.name == 'login' && authenticationService.isLoggedin())
             {
                  event.preventDefault();
-                 var currentmenu = $cookieStore.get('currentmenu')
+                 
                  if(currentmenu.url){
                     $state.go(currentmenu.url); 
                  }else{
                      $state.go('home');
+                    $rootScope.$broadcast('setmenuitem', "home");
                  }
+
+            }else{
+                if(!currentmenu.url != next.name){
+                  $rootScope.$broadcast('setmenuitem', next.name);
+                }
             }
+
+             
         });
 
     }]);
