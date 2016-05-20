@@ -1,10 +1,8 @@
-<div id="main_icon" ng-click="toggleMenu()">
-    <a>
-        <span class="glyphicon" ng-class="{'glyphicon-triangle-left fa-5x' : expanded, 'glyphicon-triangle-right fa-5x' : !expanded}"></span>
-    </a>
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" ng-click="toggleMenu()"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+    <ul class="flexy-menu orange" id="sidebar" ng-repeat="items in menu">
+        <li class="left" ng-repeat="item in items">
+            <a ng-click="selectMenu(item)">{{item.title}}</a>
+        </li>
+    </ul>
 </div>
-<ul class="sidebar-nav" id="sidebar" ng-repeat="items in menu">
-    <li ng-repeat="item in items">
-        <a ng-click="selectMenu(item)">{{item.title}}<span class="sub_icon glyphicon"></a>
-    </li>
-</ul>

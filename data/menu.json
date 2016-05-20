@@ -11,5 +11,19 @@
         "id": "3",
         "title": "about",
         "url": "about"
+    }],
+
+     "admin": [{
+        "id": "1",
+        "title": "TFM",
+        "url": "tfm"
+    }, {
+        "id": "2",
+        "title": "TFSC",
+        "url": "tfsc"
+    }, {
+        "id": "3",
+        "title": "RC",
+        "url": "rc"
     }]
 }

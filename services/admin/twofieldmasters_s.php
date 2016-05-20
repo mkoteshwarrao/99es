@@ -35,6 +35,28 @@ class twofieldmasters_s extends dbconnector {
             echo false;
         }       
     }
+
+      function getTwoCategoryList($params) {
+        
+       if($params['key'])
+       {
+            // $query = "SELECT * FROM `two_field_subcategory`";
+            $query = "SELECT * FROM two_field_category WHERE category_id = '".$params['key']."'";
+
+       }else{
+            $query = "SELECT * FROM two_field_category";
+       }
+        
+        $result = parent::execute($query,'json');
+      
+        if($result){
+            echo $result;
+        }
+        else
+        {
+            echo false;
+        }       
+    }
 }
 
 ?>

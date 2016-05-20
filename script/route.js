@@ -1,4 +1,4 @@
-app.config( ['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -37,42 +37,31 @@ app.config( ['$stateProvider','$urlRouterProvider',function($stateProvider, $url
             templateUrl: 'pages/productdetails.html',
             controller: 'productDetailsController'
         })
+        .state('tfsc', {
+            url: '/tfsc',
+            templateUrl: 'admin/pages/twofieldmaster.html',
+            controller: 'twoFieldSubCategoryController'
+        })
 
 
 }]);
 
-app.run(['$location','$rootScope','$state','authenticationService','$urlRouter','$cookieStore',
-  function ($location,$rootScope,$state,authenticationService,$urlRouter,$cookieStore) {
+app.run(['$location', '$rootScope', '$state', 'authenticationService', '$urlRouter', '$cookieStore',
+    function($location, $rootScope, $state, authenticationService, $urlRouter, $cookieStore) {
 
         $rootScope.authorization = $cookieStore.get('authorization') || {};
         $rootScope.location = $location;
-        $rootScope.$on('$stateChangeStart', function (event, next, current) {
+        $rootScope.$on('$stateChangeStart', function(event, next, current) {
 
-            $rootScope.location = $location;
-            var currentmenu = $cookieStore.get('currentmenu')
             if (next.name != 'login' && !authenticationService.isLoggedin()) {
                 event.preventDefault();
-                 debugger;
+                debugger;
                 $state.go('login');
+            } else if (next.name == 'login' && authenticationService.isLoggedin()) {
+                event.preventDefault();
+                $state.go('home');
             }
-            else if (next.name == 'login' && authenticationService.isLoggedin())
-            {
-                 event.preventDefault();
-                 
-                 if(currentmenu.url){
-                    $state.go(currentmenu.url); 
-                 }else{
-                     $state.go('home');
-                    $rootScope.$broadcast('setmenuitem', "home");
-                 }
-
-            }else{
-                if(!currentmenu.url != next.name){
-                  $rootScope.$broadcast('setmenuitem', next.name);
-                }
-            }
-
-             
         });
 
-    }]);
+    }
+]);

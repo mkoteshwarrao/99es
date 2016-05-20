@@ -1,17 +1,23 @@
-<div class="container-fullwidth gradient">
+<div class="container-fullwidth headergrad">
     <nav class="navbar">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" ui-sref="home">sample</a>
-            </div>
-            <div class="dropdown navbar-right">
-                <a data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-th-list"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li ng-click="logout()" class="dropdown-header"><span class="label label-danger">Logout</span></li>
-                </ul>
-            </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="home">sample</a>
+        </div>
+        <div class="dropdown navbar-right orange">
+            <a data-toggle="dropdown">
+                <span class="glyphicon glyphicon-th-list"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-click="logout()" class="dropdown-header">
+                    <span class="label label-danger">Logout</span>
+                </li>
+            </ul>
         </div>
     </nav>
+</div>
+<div class="controlbar controlbargrad">
+    <!--a ng-click="toggleMenu()">
+        <!--span class="glyphicon" ng-class="{'glyphicon-triangle-left' : expanded, 'glyphicon-triangle-right fa-5x' : !expanded}"></span>
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </a-->
 </div>

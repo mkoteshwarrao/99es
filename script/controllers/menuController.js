@@ -1,10 +1,11 @@
 app.controller('menuController',
-    function mainController($location,$cookieStore, $rootScope, $state, $scope, menuService) {
+    function mainController($location, $cookieStore, $rootScope, $state, $scope, menuService) {
 
         var mc = $scope;
-        mc.expanded = false;
+
         mc.message = "mainController";
         mc.menu = mc.menu || {};
+        mc.currentmenu = mc.currentmenu || {};
         mc.loadMenu = menuService.getMenu();
 
         mc.loadMenu.then(
@@ -20,49 +21,28 @@ app.controller('menuController',
         );
 
         mc.toggleMenu = function() {
-            $("#wrapper").toggleClass("active");
-            mc.expanded = !mc.expanded;
+            $("#mySidenav").toggleClass("active");
         };
 
         mc.selectMenu = function(menuitem) {
-
-            $rootScope.currentmenu = menuitem
-            $cookieStore.put('currentmenu', $rootScope.currentmenu);
-            $("#wrapper").toggleClass("active");
-            $rootScope.$broadcast('menuitemselected', $rootScope.currentmenu);
-            $state.go($rootScope.currentmenu.url);
+            $("#mySidenav").toggleClass("active");
+            mc.currentmenu = menuitem;
+            $state.go(menuitem.url);
 
         };
 
-        $rootScope.$on('$locationChangeSuccess',
-            function(event, url, oldUrl, state, oldState) {
-                if ($rootScope.currentmenu.url != url) {
-
-                    angular.forEach(values, function(value, key) {
-                    	if(url == value.url){
-
-                    			$rootScope.currentmenu = value
-            					$cookieStore.put('currentmenu', $rootScope.currentmenu);
-            					$rootScope.$broadcast('menuitemselected', $rootScope.currentmenu);
-                    	}
-                    });
-                }
+        $rootScope.$on('$stateNotFound',
+            function(event, unfoundState, fromState, fromParams) {
+                console.log(unfoundState.to); // "lazy.state"
+                console.log(unfoundState.toParams); // {a:1, b:2}
+                console.log(unfoundState.options); // {inherit:false} + default options
             });
 
-         $rootScope.$on('setmenuitem',
-            function(event,next) {
-            	debugger;
-                if ($rootScope.currentmenu.url != next) {
-
-                    angular.forEach($rootScope.currentmenu, function(value, key) {
-                        if (url == value.url) {
-
-                            $rootScope.currentmenu = value
-                            $cookieStore.put('currentmenu', $rootScope.currentmenu);
-                            $rootScope.$broadcast('menuitemselected', $rootScope.currentmenu);
-                        }
-                    });
-                }
-         });
+        $rootScope.$on('$stateChangeSuccess',
+            function(event) {
+                $rootScope.currentmenu = mc.currentmenu;
+                $cookieStore.put('currentmenu', $rootScope.currentmenu);
+                $rootScope.$broadcast('menuitemselected', $rootScope.currentmenu);
+            });
 
     });
