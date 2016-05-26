@@ -36,10 +36,10 @@ class dbconnector {
      function execute1($query)
     {      
     	
-    		mysql_connect("localhost", "root", "") or die (mysql_error ());			 
-			mysql_select_db("99es") or die(mysql_error());			 
-			$this->data = mysql_query($query); 
-			mysql_close();
+            @mysql_connect("localhost", "root", "") or die (mysql_error ());             
+            mysql_select_db("99es") or die(mysql_error());           
+            $this->data = mysql_query($query); 
+            mysql_close();
 
 			return $this->data;
        

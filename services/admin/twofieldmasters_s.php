@@ -18,7 +18,6 @@ class twofieldmasters_s extends dbconnector {
         
        if($params['key'])
        {
-            // $query = "SELECT * FROM `two_field_subcategory`";
             $query = "SELECT * FROM two_field_subcategory WHERE category_id = '".$params['key']."'";
 
        }else{
@@ -40,14 +39,34 @@ class twofieldmasters_s extends dbconnector {
         
        if($params['key'])
        {
-            // $query = "SELECT * FROM `two_field_subcategory`";
             $query = "SELECT * FROM two_field_category WHERE category_id = '".$params['key']."'";
-
        }else{
             $query = "SELECT * FROM two_field_category";
        }
         
         $result = parent::execute($query,'json');
+      
+        if($result){
+            echo $result;
+        }
+        else
+        {
+            echo false;
+        }       
+    }
+
+    function updateSubCategory($params) {
+      $obj = $params['data'];
+       
+       if($obj['id'])
+       {
+            $query = "UPDATE two_field_subcategory SET category_id='".$obj['category_id']."',description='".$obj['description']."',bundle='".$obj['bundle']."',status='".$obj['status']."' WHERE id='".$obj['id']."'";
+
+       }else{
+            //$query = ​"INSERT INTO two_field_subcategory(category_id, description, bundle, status) VALUES //('".$obj.category_id."','".$obj.description."','".$obj.bundle."','".$obj.status."')";
+       }
+        
+        $result = parent::execute1($query);
       
         if($result){
             echo $result;

@@ -1,0 +1,61 @@
+<div class="container-fluid" ng-init="loadCategories()">
+
+    <select name="categories_cmb" id="categories_cmb" 
+    ng-options="item.description for item in categories track by item.id" 
+    ng-model="selectedCategory" 
+    ng-change="loadSubCategories()">
+    </select>
+    
+    <div class="row">
+        <div class="container-fluid col-sm-9 col-md-6">
+            <table class="table">
+                <thead>
+                    <tr class="rch">
+                        <th>id</th>
+                        <th>category_id</th>
+                        <th>description</th>
+                        <th>status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in products" ng-click="selectSubCategory(item)">
+                        <td>{{item.id }}</td>
+                        <td>{{item.category_id}}</td>
+                        <td>{{item.description }}</td>
+                        <td>{{item.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3 col-md-6">
+            <form name="pf" ng-submit="editSubCategory()">
+                <p>Id : {{selectedSubCategory.id}} </p>
+                <p>category: {{selectedSubCategory.category_id}} </p>
+                <p>Description:
+                    <br>
+                    <input type="text" name="description" ng-model="selectedSubCategory.description" required></input>
+                    <span style="color:red" ng-show="pf.description.$dirty && pf.description.$invalid">
+                    <span ng-show="pf.description.$error.required">description color</span>
+                    </span>
+                </p>
+                <p>Bundle:
+                    <br>
+                    <textarea name="bundle" ng-model="selectedSubCategory.bundle" required></textarea>
+                    <span style="color:red" ng-show="pf.bundle.$dirty && pf.bundle.$invalid">
+                    <span ng-show="pf.bundle.$error.required">bundle is required.</span>
+                    </span>
+                </p>
+                <p>status:
+                    <br>
+                    <input type="number" name="status" numericbinding  ng-model="selectedSubCategory.status" required min="1" max="3"></input>
+                    <span style="color:red" ng-show="pf.status.$dirty && pf.status.$invalid">
+                    <span ng-show="pf.status.$error.required">status is required.</span>
+                    </span>
+                </p>
+                <p>
+                    <button class="btn btn-primary" type="submit" ng-disabled="!pf.$valid || !pf.$dirty">Update</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
