@@ -63,7 +63,7 @@ class twofieldmasters_s extends dbconnector {
             $query = "UPDATE two_field_subcategory SET category_id='".$obj['category_id']."',description='".$obj['description']."',bundle='".$obj['bundle']."',status='".$obj['status']."' WHERE id='".$obj['id']."'";
 
        }else{
-            //$query = ​"INSERT INTO two_field_subcategory(category_id, description, bundle, status) VALUES //('".$obj.category_id."','".$obj.description."','".$obj.bundle."','".$obj.status."')";
+            //$query = ​"INSERT into two_field_subcategory (category_id, description, bundle, status) VALUES //('".$obj['category_id']."','".$obj['description']."','".$obj['bundle']."','".$obj['status']."')";
        }
         
         $result = parent::execute1($query);

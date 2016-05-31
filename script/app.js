@@ -4,7 +4,8 @@ var app = angular.module("app", ['ui.bootstrap',
     'ngCookies',
     'configAPI',
     'masterService',
-    'kendo.directives'
+    'kendo.directives',
+    'uigrid'
 ]);
 
 app.directive('numericbinding', function () {

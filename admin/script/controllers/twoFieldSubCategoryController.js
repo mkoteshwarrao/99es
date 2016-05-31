@@ -33,12 +33,13 @@ app.controller('twoFieldSubCategoryController', ['$scope', '$modal', '$http', 'a
         } /*init end*/
 
         $scope.loadSubCategories = function() {
-            $scope.selectedSubCategory = null;
+            $scope.clear();
             $scope.getProducts = twoFieldMasterServices.getSubCategoryByKey($scope.selectedCategory.id);
             $scope.getProducts.then(
                 function(items) {
                     debugger;
-                      $scope.products = items.data;
+                    $scope.products = items.data;
+                    $scope.mainGridOptions.data = $scope.products;
                 },
                 function(reason) {
                     debugger;
@@ -48,7 +49,12 @@ app.controller('twoFieldSubCategoryController', ['$scope', '$modal', '$http', 'a
 
         $scope.selectSubCategory = function(item) {
             debugger;
+            //$($event.currentTarget).addClass("selected").siblings().removeClass("selected");
             $scope.selectedSubCategory = item;
+        }
+
+        $scope.deleteItem = function(item) {
+            alert("deleteItem :");
         }
 
         $scope.showDetails = function(value) {
@@ -81,18 +87,46 @@ app.controller('twoFieldSubCategoryController', ['$scope', '$modal', '$http', 'a
             res.then(
                 function(result) {
                     debugger;
-                    if(parseInt(result.data) == 1){
+                    if (parseInt(result.data) == 1) {
                         alert("record updated");
                         $scope.loadSubCategories();
-                        $scope.selectedSubCategory = null;
+                        $scope.clear();
                     }
-                     
+
                 },
 
                 function(reason) {
-                        
+
                 }
             );
         };
+
+        $scope.clear = function() {
+            $scope.selectedSubCategory = {};
+            $scope.selectedSubCategory.category_id = $scope.selectedCategory.id || null;
+        }
+
+        $scope.mainGridOptions = {
+            data: {},
+            rowdelete:true,
+            columns: [{
+                field: "id",
+                title: "ID",
+                hide: false
+            }, {
+                field: "category_id",
+                title: "category",
+                width: "120px"
+            }, {
+                field: "description",
+                title: "Description",
+                width: "120px"
+            }, {
+                field: "status",
+                title: "Status",
+                width: "120px"
+            }]
+        };
+
     }
 ]);
