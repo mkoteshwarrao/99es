@@ -223,5 +223,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2ff9b', end
 
 }
 
- 
+.custpop{
+    position: absolute;
+    width: 300px;
+    height: auto!important;
+    visibility: hidden;
+    margin: 0;
+    border-radius: 0;
+    padding: 12px 0;
+    margin-top: 11px;
+    background: #eee;
+    z-index: 1000;
+    border: 1px solid #000;
+}
 
+.show {
+    display: block!important;
+    visibility: visible;
+}

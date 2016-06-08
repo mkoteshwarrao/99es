@@ -9,7 +9,7 @@ app.controller('twoFieldSubCategoryController', ['$scope', '$modal', '$http', 'a
         $scope.Object.bundle = "";
         $scope.Object.status = "";
 
-
+        $scope.showProduct = false;
         $scope.products = {};
         $scope.categories = {};
         $scope.myModal = $scope.myModal | {};
@@ -103,12 +103,13 @@ app.controller('twoFieldSubCategoryController', ['$scope', '$modal', '$http', 'a
 
         $scope.clear = function() {
             $scope.selectedSubCategory = {};
-            $scope.selectedSubCategory.category_id = $scope.selectedCategory.id || null;
+            $scope.selectedSubCategory.category_id =  null;
+            $scope.form_set_pristine($('#pf'))
         }
 
         $scope.mainGridOptions = {
             data: {},
-            rowdelete:true,
+            rowdelete: true,
             columns: [{
                 field: "id",
                 title: "ID",
@@ -127,6 +128,28 @@ app.controller('twoFieldSubCategoryController', ['$scope', '$modal', '$http', 'a
                 width: "120px"
             }]
         };
+
+        $scope.form_set_pristine = function(form) {
+            if (form.$setPristine) {
+                form.$setPristine();
+            } else {
+                form.$pristine = true;
+                form.$dirty = false;
+                angular.forEach(form, function(input, key) {
+                    if (input.$pristine)
+                        input.$pristine = true;
+                    if (input.$dirty) {
+                        input.$dirty = false;
+                    }
+                });
+            }
+        };
+
+        $scope.showPopUP = function() {
+                $scope.showProduct = !$scope.showProduct;
+        } 
+
+
 
     }
 ]);

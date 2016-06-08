@@ -1,15 +1,19 @@
 <div class="container-fluid" ng-init="loadCategories()">
-
-    <select name="categories_cmb" id="categories_cmb" 
-    ng-options="item.description for item in categories track by item.id" 
-    ng-model="selectedCategory" 
-    ng-change="loadSubCategories()">
+    <select name="categories_cmb" id="categories_cmb" ng-options="item.description for item in categories track by item.id" ng-model="selectedCategory" ng-change="loadSubCategories()">
     </select>
-    
     <div class="row">
-
         <div class="container-fluid col-sm-9 col-md-6">
-             <k-data-grid dataprovider="mainGridOptions"  row-selected="selectSubCategory" delete-item="deleteItem"></k-data-grid>
+            <k-data-grid dataprovider="mainGridOptions" row-selected="selectSubCategory" delete-item="deleteItem"></k-data-grid>
+        </div>
+
+        <button id="btn" ng-click="showPopUP()">show</button>
+
+        <div  class="custpop" showhide  showele="showProduct" ignore="#btn">
+            <ul style="list-style-type:circle">
+                <li>Coffee</li>
+                <li>Tea</li>
+                <li>Milk</li>
+            </ul>
         </div>
 
         <div class="col-sm-3 col-md-6">
@@ -32,17 +36,16 @@
                 </p>
                 <p>status:
                     <br>
-                    <input type="number" name="status" numericbinding  ng-model="selectedSubCategory.status" required min="1" max="3"></input>
+                    <input type="number" name="status" numericbinding ng-model="selectedSubCategory.status" required min="1" max="3"></input>
                     <span style="color:red" ng-show="pf.status.$dirty && pf.status.$invalid">
                     <span ng-show="pf.status.$error.required">status is required.</span>
                     </span>
                 </p>
                 <p>
                     <button class="btn btn-primary" type="submit" ng-disabled="!pf.$valid || !pf.$dirty">Update</button>
-                     <button class="btn btn-primary" ng-click="clear()" ng-disabled="selectedSubCategory.category_id == null">Clear</button>
+                    <button class="btn btn-primary" ng-click="clear()" ng-disabled="selectedSubCategory.category_id == null">Clear</button>
                 </p>
             </form>
         </div>
     </div>
 </div>
-
